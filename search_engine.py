@@ -50,10 +50,10 @@ def search(query):
     for page_id,score in ranked_results:
             
         results.append({
-                "title": pages[page_id]["content"].split("|")[0],
+                "title": " ".join(pages[page_id]["content"].split()[:10]),
                 "url" : pages[page_id]["url"],
                 "score": round(score,3),
-                "preview": pages[page_id]["content"][100:350]
+                "preview": pages[page_id]["content"][:250]+ "...."
             })      
             
     return results                          
