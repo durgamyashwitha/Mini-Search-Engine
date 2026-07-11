@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('home') }}" id="logo-link" style = "text-decoration :none;">
+    <h1 id="logo" style = "font-size : 40px">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        SearchLite
+    </h1>
+</a>
+
+    <div class="b">
+
+    <form action="/search" method="GET" style = "margin-left : 100px">
+
+    <input
+        type="text"
+        name="query"
+        value="{{ query }}"
+        required
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+    <h1>Search Results</h1>
+
+    <h3>Query: {{ query }}</h3>
+
+    <hr>
+{% if results %}
+
+    <h3>{{ count }} results found</h3>
+
+    {% for result in results %}
+
+        <div class="result">
+
+            <h3>
+    <a href="{{ result.url }}" target="_blank">
+        {{ result.title }}
+    </a>
+          </h3>
+
+            <p>
+                <strong>Score:</strong>
+                {{ result.score }}
+            </p>
+
+            <p>
+                {{ result.preview }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <h3>No Results Found</h3>
+
+{% endif %}
+
+    </div>
+
+</body>
+</html>
